@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 50px;
+            margin-bottom: 20px;
+        }
+        .scoreboard {
+            width: 150px;
+            border: 2px solid black;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f8f8f8;
+        }
+        .scoreboard h2 {
+            margin-bottom: 20px;
+        }
+        .choices {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .choice {
+            padding: 20px;
+            border: 2px solid black;
+            border-radius: 10px;
+            transition: background-color 0.3s, color 0.3s;
+            cursor: pointer;
+        }
+        .choice:hover {
+            background-color: lightgray;
+            color: white;
+        }
+        .status {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Rock Paper Scissors</h1>
+    <div class="container">
+        <div class="scoreboard">
+            <h2>User Score</h2>
+            <p id="user-score">0</p>
+        </div>
+        <div class="scoreboard">
+            <h2>Computer Score</h2>
+            <p id="computer-score">0</p>
+        </div>
+    </div>
+    <div class="choices">
+        <div class="choice" onclick="playGame('rock')">&#128074</div>
+        <div class="choice" onclick="playGame('paper')">&#9995</div>
+        <div class="choice" onclick="playGame('scissors')" rotate="-90">&#9996</div>
+    </div>
+    <div class="status">
+        Game Started: <span id="game-started">No</span><br>
+        Winner: <span id="winner">None</span>
+    </div>
+
+    <script>
+        let userScore = 0;
+        let computerScore = 0;
+        const userScoreElement = document.getElementById('user-score');
+        const computerScoreElement = document.getElementById('computer-score');
+        const gameStartedElement = document.getElementById('game-started');
+        const winnerElement = document.getElementById('winner');
+
+        function playGame(userChoice) {
+            gameStartedElement.textContent = 'Yes';
+            const computerChoice = getComputerChoice();
+            const winner = determineWinner(userChoice, computerChoice);
+
+            updateScores(winner);
+            displayWinner(winner, userChoice, computerChoice);
+        }
+
+        function getComputerChoice() {
+            const choices = ['rock', 'paper', 'scissors'];
+            const randomIndex = Math.floor(Math.random() * choices.length);
+            return choices[randomIndex];
+        }
+
+        function determineWinner(userChoice, computerChoice) {
+            if (userChoice === computerChoice) {
+                return 'draw';
+            }
+            if (
+                (userChoice === 'rock' && computerChoice === 'scissors') ||
+                (userChoice === 'paper' && computerChoice === 'rock') ||
+                (userChoice === 'scissors' && computerChoice === 'paper')
+            ) {
+                return 'user';
+            }
+            return 'computer';
+        }
+
+        function updateScores(winner) {
+            if (winner === 'user') {
+                userScore++;
+                userScoreElement.textContent = userScore;
+            } else if (winner === 'computer') {
+                computerScore++;
+                computerScoreElement.textContent = computerScore;
+            }
+        }
+
+        function displayWinner(winner, userChoice, computerChoice) {
+            if (winner === 'draw') {
+                winnerElement.textContent = `It's a draw! Both chose ${userChoice}`;
+            } else if (winner === 'user') {
+                winnerElement.textContent = `You win! ${userChoice} beats ${computerChoice}`;
+            } else {
+                winnerElement.textContent = `Computer wins! ${computerChoice} beats ${userChoice}`;
+            }
+        }
+    </script>
+</body>
+</html>

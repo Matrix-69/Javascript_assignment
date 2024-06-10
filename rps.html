@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="rps.css">
+    <title>Rock , Paper and Scissors</title>
+</head>
+<body>   
+    <div id="main">
+        <h1>Rock Paper Scissor</h1> 
+        <button style="font-size: 30px;" onclick='findwinner("rock")'>&#128074;</button>
+        <button style="font-size: 30px;" onclick='findwinner("paper")'>&#128400;</button>
+        <button style="font-size: 30px;"  onclick ='findwinner("scissor")'>&#x270C;</button>
+    <br>
+    <section>
+    <div id="uscore">
+        <label>UserScore</label>  
+        <BR>
+            <BR>
+                <br>
+                <BR>
+                    <br>
+        <label id="userChoice">UserChoice </label>  
+
+        <h4>0</h4>
+    </div>
+    <div id="cscore">
+        <label>ComputerScore</label>  
+        <BR>
+            <br>
+            <BR>
+                <br>
+                <br>
+
+            <label id="computerChoice">Computer Choice </label>  
+        <h4>0</h4>
+    </div>
+    </section>
+    <h3 id="result"> Game Started  </h3>
+    </div>
+    <script>
+
+    function findwinner(choice)
+        {
+            var no = Math.random()
+            var computerChoice = "";
+            var plyerChoice = "";
+    if (no >= 0 && no < 1/3)
+    {
+    computerChoice = "rock";
+    } 
+    else if (no >= 1/3 && no < 2/3) 
+    {
+    computerChoice = "paper";
+    } 
+    else if (no >= 2/3 && no <= 1) 
+    {
+    computerChoice = "scissor";
+    }
+            document.getElementById("computerChoice").textContent = computerChoice;
+            document.getElementById("userChoice").textContent = choice;
+        }
+    </script>
+</body>
+</html>
